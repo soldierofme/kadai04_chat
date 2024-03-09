@@ -9,6 +9,7 @@
 
     <div>
       <div>名前：<input type="text" id="uname" /></div>
+      <div>日時：<input type="text" id="daytime" /></div>
       <div>
         <textarea id="text" cols="30" rows="10"></textarea>
         <button id="send">送信</button>
@@ -59,6 +60,16 @@
         };
         const newPostRef = push(dbRef);
         set(newPostRef, msg);
+      });
+      onChildAdded(dbRef, function (data) {
+        const msg = date.val();
+        const key = data.key;
+        let h = "<p>";
+        h += msg.uname;
+        h += "<br>";
+        h += msg.text;
+        h += "</p>";
+        $("#output").append(h);
       });
     </script>
   </body>
